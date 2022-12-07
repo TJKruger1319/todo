@@ -1,0 +1,13 @@
+.cross-out {
+    text-decoration: line-through;
+    color: red;
+}
+
+.todo-list li {
+    cursor: pointer;
+    font-size: larger;
+}
+
+button {
+    cursor: pointer;
+}
