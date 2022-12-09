@@ -3,6 +3,7 @@ const todoList = document.querySelector('.todo-list');
 const form = document.querySelector("form");
 const newTodoInput = document.querySelector("#todo-name");
 let todoArray = [];
+let keyArray = [];
 
 if (localStorage.todos) {
     todoArray = JSON.parse(localStorage.todos);
@@ -29,8 +30,8 @@ todoList.addEventListener('click', function(e){
     }   
     else if (e.target.tagName === 'BUTTON') {
         e.target.parentElement.remove();
-        //removeFromLocalStorage(e.target.parentElement.innerText);
-        localStorage.removeItem("todos", e.target);
+        removeFromLocalStorage(e.target.parentElement.innerText);
+        
     }
 });
 
@@ -46,17 +47,17 @@ function addToLocalStorage(todoValue) {
     value: todoValue,
     completed: false,
  });
- localStorage.setItem("todos", JSON.stringify(todoArray));
+ 
+ localStorage.setItem(todoValue, JSON.stringify(todoArray));
 }
  
 function removeFromLocalStorage(todoValue) {
- for (let i = 0; i < todoArray.length; i++) {
-   if (todoArray[i].value === todoValue) {
-     todoArray.splice(i, 1);
+ for (let i = 0; i < localStorage.length; i++) {
+   if (localStorage.key(i) === todoValue) {
+     localStorage.removeItem(i);
      break;
    }
  }
- localStorage.setItem("todos", JSON.stringify(todoArray));
 }
 
 function addToList(todoValue, completed = false) {
